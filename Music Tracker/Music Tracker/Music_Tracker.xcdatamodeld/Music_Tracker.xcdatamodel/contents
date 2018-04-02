@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1212" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PlaybackRecord" representedClassName="PlaybackRecord" syncable="YES">
+        <attribute name="initalDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initalHeartRateLastHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalPlaybackState" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalPlaybackTime" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="initalRepeatMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalShuffleMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="initalVolume" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastPlaybackState" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastUpdateDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="volumeLevels" attributeType="Transformable" syncable="YES"/>
+        <relationship name="song" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="records" inverseEntity="Song" syncable="YES"/>
+    </entity>
+    <entity name="Song" representedClassName="Song" syncable="YES">
+        <attribute name="albumArtist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumArtistPersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="albumPersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="albumTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="albumTrackCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="albumTrackNumber" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="artistPersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="beatsPerMinute" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="composer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="composerPersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="genrePersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="isExplicitItem" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="persistentID" attributeType="String" syncable="YES"/>
+        <attribute name="playbackDuration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="playbackStoreID" attributeType="String" syncable="YES"/>
+        <attribute name="playCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="skipCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaybackRecord" inverseName="song" inverseEntity="PlaybackRecord" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Song" positionX="-281" positionY="-9" width="128" height="373"/>
+        <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="238"/>
+    </elements>
+</model>
