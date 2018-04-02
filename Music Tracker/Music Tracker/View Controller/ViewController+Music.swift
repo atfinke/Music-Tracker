@@ -52,7 +52,7 @@ extension ViewController {
     func fetchSong(for mediaItem: MPMediaItem) -> Song? {
         let songFetch = NSFetchRequest<Song>(entityName: "Song")
         songFetch.fetchLimit = 1
-        songFetch.predicate = NSPredicate(format: "persistentID = %@", mediaItem.persistentID.description)
+        songFetch.predicate = NSPredicate(format: "playbackStoreID = %@", mediaItem.playbackStoreID.description)
         do {
             if let song = try managedContext.fetch(songFetch).first  {
                 return song
@@ -134,7 +134,7 @@ extension ViewController {
 
     func updateUI(song: Song, record: PlaybackRecord) {
         var string = "Current Song:\n\n"
-        for key in song.entity.attributesByName.keys.sorted() {
+        for key in song.entity.attributesByName.keys.sorted() where key != "artworkData" {
             if let value = song.value(forKey: key) {
                 string += "\(key): \(value)\n"
             }

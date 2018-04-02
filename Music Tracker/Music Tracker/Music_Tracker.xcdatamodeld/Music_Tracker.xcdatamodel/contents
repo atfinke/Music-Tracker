@@ -24,6 +24,7 @@
         <attribute name="albumTrackNumber" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="artistPersistentID" attributeType="String" syncable="YES"/>
+        <attribute name="artworkData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="beatsPerMinute" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="composer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="composerPersistentID" attributeType="String" syncable="YES"/>
@@ -40,7 +41,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaybackRecord" inverseName="song" inverseEntity="PlaybackRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Song" positionX="-281" positionY="-9" width="128" height="373"/>
         <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="238"/>
+        <element name="Song" positionX="-281" positionY="-9" width="128" height="390"/>
     </elements>
 </model>

@@ -55,6 +55,10 @@ public class Song: NSManagedObject {
 
         self.releaseDate = mediaItem.releaseDate as NSDate?
         self.isExplicitItem = mediaItem.isExplicitItem
+
+        if let artwork = mediaItem.artwork, let image = artwork.image(at: artwork.bounds.size) {
+            self.artworkData = UIImagePNGRepresentation(image)
+        }
     }
 
     func update(with mediaItem: MPMediaItem) {
