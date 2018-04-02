@@ -57,7 +57,7 @@ public class Song: NSManagedObject {
         self.isExplicitItem = mediaItem.isExplicitItem
 
         if let artwork = mediaItem.artwork, let image = artwork.image(at: artwork.bounds.size) {
-            self.artworkData = UIImagePNGRepresentation(image)
+            self.artworkData = UIImageJPEGRepresentation(image, 0.7)
         }
     }
 
