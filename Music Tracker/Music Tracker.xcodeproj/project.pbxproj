@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		145047B920733F50005AC411 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145047B820733F50005AC411 /* MapViewController.swift */; };
+		1454F5F620734B0C0095F90F /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */; };
+		14A0634B20740E1D004DD746 /* RecentRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */; };
 		14AA24882071CD240050A507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA24872071CD240050A507 /* AppDelegate.swift */; };
 		14AA248D2071CD240050A507 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AA248B2071CD240050A507 /* Main.storyboard */; };
 		14AA24902071CD240050A507 /* Music_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14AA248E2071CD240050A507 /* Music_Tracker.xcdatamodeld */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		145047B820733F50005AC411 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "Music Tracker/View Controller/New Group/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewController.swift; sourceTree = "<group>"; };
+		14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecordsViewController.swift; sourceTree = "<group>"; };
 		14AA24842071CD240050A507 /* Music Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AA24872071CD240050A507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14AA248C2071CD240050A507 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +63,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14A0634C20741016004DD746 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				14AA24A42071CD510050A507 /* ViewController.swift */,
+				14AA24B82071F8590050A507 /* ViewController+Music.swift */,
+				14AA24BA2071F96D0050A507 /* ViewController+Fetching.swift */,
+				14AA24A52071CD510050A507 /* ViewController+Location.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		14A0634D2074101C004DD746 /* Viewers */ = {
+			isa = PBXGroup;
+			children = (
+				145047B820733F50005AC411 /* MapViewController.swift */,
+				1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */,
+				14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */,
+			);
+			path = Viewers;
+			sourceTree = "<group>";
+		};
 		14AA247B2071CD240050A507 = {
 			isa = PBXGroup;
 			children = (
@@ -77,7 +104,7 @@
 		14AA24862071CD240050A507 /* Music Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				14AA24BD2071FCA30050A507 /* View Controller */,
+				14AA24BD2071FCA30050A507 /* Controllers */,
 				14AA24BC2071FC9C0050A507 /* Model */,
 				14AA24872071CD240050A507 /* AppDelegate.swift */,
 				14AA248B2071CD240050A507 /* Main.storyboard */,
@@ -110,15 +137,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		14AA24BD2071FCA30050A507 /* View Controller */ = {
+		14AA24BD2071FCA30050A507 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				14AA24A42071CD510050A507 /* ViewController.swift */,
-				14AA24B82071F8590050A507 /* ViewController+Music.swift */,
-				14AA24BA2071F96D0050A507 /* ViewController+Fetching.swift */,
-				14AA24A52071CD510050A507 /* ViewController+Location.swift */,
+				14A0634C20741016004DD746 /* Core */,
+				14A0634D2074101C004DD746 /* Viewers */,
 			);
-			path = "View Controller";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +227,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AA24AD2071E1260050A507 /* Song+CoreDataProperties.swift in Sources */,
+				1454F5F620734B0C0095F90F /* RecordsTableViewController.swift in Sources */,
+				14A0634B20740E1D004DD746 /* RecentRecordsViewController.swift in Sources */,
 				14AA24B32071ECB40050A507 /* HealthManager.swift in Sources */,
 				14AA24B92071F8590050A507 /* ViewController+Music.swift in Sources */,
 				14AA24A62071CD510050A507 /* ViewController.swift in Sources */,
 				14AA24AC2071E1260050A507 /* Song.swift in Sources */,
 				14AA24B12071E6F50050A507 /* PlaybackRecord+CoreDataProperties.swift in Sources */,
 				14AA24B02071E6F50050A507 /* PlaybackRecord.swift in Sources */,
+				145047B920733F50005AC411 /* MapViewController.swift in Sources */,
 				14AA24A72071CD510050A507 /* ViewController+Location.swift in Sources */,
 				14AA24882071CD240050A507 /* AppDelegate.swift in Sources */,
 				14AA24902071CD240050A507 /* Music_Tracker.xcdatamodeld in Sources */,

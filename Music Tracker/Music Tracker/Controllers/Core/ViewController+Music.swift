@@ -21,10 +21,13 @@ extension ViewController {
 
             print("Now Playing Notification")
 
+            let date = NSDate()
+            self.fetchLastPlaybackRecord()?.nextPlaybackInitalDate = date
+
             guard let item = player.nowPlayingItem,
                 let song = self.fetchSong(for: item) else { return }
 
-            self.createPlaybackRecord(song: song)
+            self.createPlaybackRecord(song: song, date: date)
         }
 
         let volumeName = NSNotification.Name.MPMusicPlayerControllerVolumeDidChange
@@ -35,7 +38,9 @@ extension ViewController {
             guard let item = player.nowPlayingItem,
                 let song = self.fetchSong(for: item) else { return }
 
-            self.updateLastPlaybackRecord(for: song)
+            DispatchQueue.main.async {
+                self.updateLastPlaybackRecord(for: song, volume: self.volume())
+            }
         }
 
         let playbackName = NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange
@@ -45,7 +50,9 @@ extension ViewController {
             guard let item = player.nowPlayingItem,
                 let song = self.fetchSong(for: item) else { return }
 
-            self.updateLastPlaybackRecord(for: song)
+            DispatchQueue.main.async {
+                self.updateLastPlaybackRecord(for: song, volume: nil)
+            }
         }
     }
 
@@ -64,13 +71,14 @@ extension ViewController {
         }
     }
 
-    func createPlaybackRecord(song: Song) {
+    func createPlaybackRecord(song: Song, date: NSDate) {
         self.healthManager.measure { heartRate in
             DispatchQueue.main.async {
                 let volume = self.volume()
                 let location = self.locationManager.location?.coordinate
 
-                guard let record = PlaybackRecord(volume: volume,
+                guard let record = PlaybackRecord(date: date,
+                                                  volume: volume,
                                                   location: location,
                                                   heartRate: heartRate,
                                                   song: song,
@@ -88,44 +96,35 @@ extension ViewController {
         }
     }
 
-    func updateLastPlaybackRecord(for song: Song)  {
-        if let lastPlaybackRecord = lastPlaybackRecord(for: song) {
-            DispatchQueue.main.async {
-                lastPlaybackRecord.update(volume: self.volume())
-                do {
-                    try self.managedContext.save()
-                    self.updateUI(song: song, record: lastPlaybackRecord)
-                } catch let error as NSError {
-                    fatalError(#function + "Could not update record. \(error), \(error.userInfo)")
-                }
+    func updateLastPlaybackRecord(for song: Song, volume: Float?)  {
+        guard Thread.isMainThread else { fatalError() }
+
+        let lastPlaybackRecord = fetchLastPlaybackRecord()
+        if let record = lastPlaybackRecord, record.song == song {
+            record.update(volume: volume)
+            do {
+                try self.managedContext.save()
+                self.updateUI(song: song, record: record)
+            } catch let error as NSError {
+                fatalError(#function + "Could not update record. \(error), \(error.userInfo)")
             }
         } else {
-            DispatchQueue.main.async {
-                self.createPlaybackRecord(song: song)
-                do {
-                    try self.managedContext.save()
-                } catch let error as NSError {
-                    fatalError(#function + " Could not save new record. \(error), \(error.userInfo)")
-                }
+            self.createPlaybackRecord(song: song, date: NSDate())
+            do {
+                try self.managedContext.save()
+            } catch let error as NSError {
+                fatalError(#function + " Could not save new record. \(error), \(error.userInfo)")
             }
         }
     }
 
-    func lastPlaybackRecord(for song: Song) -> PlaybackRecord?  {
+    func fetchLastPlaybackRecord() -> PlaybackRecord?  {
         let playbackRecordFetch = NSFetchRequest<PlaybackRecord>(entityName: "PlaybackRecord")
         playbackRecordFetch.sortDescriptors = [NSSortDescriptor(key: "initalDate", ascending: false)]
         playbackRecordFetch.fetchLimit = 1
 
         do {
-            if let record = try managedContext.fetch(playbackRecordFetch).first  {
-                if record.song == song {
-                    return record
-                } else {
-                    print("Last record has different song")
-                    print("Last record song: " + (record.song.title ?? "N/A"))
-                    print("Current song: " + (song.title ?? "N/A"))
-                }
-            }
+            return try managedContext.fetch(playbackRecordFetch).first
         } catch {
             fatalError(error.localizedDescription)
         }

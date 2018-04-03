@@ -1,24 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ccQ-YV-Kdo">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Map-->
+        <scene sceneID="Ozt-oU-ex4">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="v4a-Wv-eUB" customClass="MapViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nyq-hm-Rks">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="usA-gM-Bu1"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="jh7-tS-GKq"/>
+                    <navigationItem key="navigationItem" id="XhX-eu-iaK"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZA-KT-dph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="698" y="856"/>
+        </scene>
+        <!--Recents-->
+        <scene sceneID="Wa7-jp-pp2">
+            <objects>
+                <tableViewController id="qBe-Ob-eGC" customClass="RecentRecordsViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Z1H-Tk-UpY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="qBe-Ob-eGC" id="Jbd-fz-g36"/>
+                            <outlet property="delegate" destination="qBe-Ob-eGC" id="g13-Qz-hqe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Recents" id="wWu-ga-d1F"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2DK-Tk-Pod" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="697" y="1539"/>
+        </scene>
+        <!--Recent-->
+        <scene sceneID="B5q-Xf-EAM">
+            <objects>
+                <navigationController id="E69-EC-ZcV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Recent" id="Qq8-AM-XaM"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PgD-qe-fFh">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qBe-Ob-eGC" kind="relationship" relationship="rootViewController" id="IOU-fh-dEc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iae-WZ-2Cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="1539"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="0tl-x1-Aye">
+            <objects>
+                <navigationController id="te4-oU-2tT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="Urt-hz-MEo"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0ZM-1d-KNJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="v4a-Wv-eUB" kind="relationship" relationship="rootViewController" id="S11-Nu-ier"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ao-Z9-qga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="856"/>
+        </scene>
+        <!--Console-->
+        <scene sceneID="L8V-YY-eu8">
+            <objects>
+                <viewController id="dTo-Cy-CZb" customClass="ViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jYf-3a-X00">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="76I-z9-ede"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Console" id="zdF-DJ-vgA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bhf-Yb-0DH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="172"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="0fj-yC-vNG">
+            <objects>
+                <tabBarController id="ccQ-YV-Kdo" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YAk-M7-4FZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dTo-Cy-CZb" kind="relationship" relationship="viewControllers" id="Dso-9W-AMd"/>
+                        <segue destination="te4-oU-2tT" kind="relationship" relationship="viewControllers" id="Rft-zd-OpL"/>
+                        <segue destination="E69-EC-ZcV" kind="relationship" relationship="viewControllers" id="yXX-hK-m7W"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IvY-NI-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1004" y="505"/>
         </scene>
     </scenes>
 </document>

@@ -21,8 +21,8 @@ extension ViewController {
             for record in records {
                 print(record.song.title as Any)
                 for time in record.volumeLevels.keys.sorted() {
-                    if let volumeLevels = record.volumeLevels[time] {
-                        print(Int(time).description + ": " + volumeLevels.description)
+                    if let volumeLevels = record.volumeLevels[time], let volume = volumeLevels["Volume"] as? Float {
+                        print(Int(time).description + ": " + volume.description)
                     } else {
                         print(Int(time).description + ": N/A")
                     }

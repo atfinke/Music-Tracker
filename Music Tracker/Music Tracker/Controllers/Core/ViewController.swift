@@ -13,18 +13,20 @@ import CoreData
 
 class ViewController: UIViewController  {
 
-    private let volumeView = MPVolumeView()
-
     lazy var managedContext: NSManagedObjectContext = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
         return appDelegate.persistentContainer.viewContext
     }()
 
     let textView = UITextView()
+    let volumeView = MPVolumeView()
+
     let healthManager = HealthManager()
     let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
+
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true))
 
         fetchLastVolumeLevels()
 
