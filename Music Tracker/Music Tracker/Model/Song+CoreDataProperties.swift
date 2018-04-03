@@ -38,7 +38,7 @@ extension Song {
     @NSManaged public var albumPersistentID: String
     @NSManaged public var albumTitle: String?
     @NSManaged public var artworkData: Data?
-    @NSManaged public var records: NSSet?
+    @NSManaged public var records: Set<PlaybackRecord>?
 
 }
 

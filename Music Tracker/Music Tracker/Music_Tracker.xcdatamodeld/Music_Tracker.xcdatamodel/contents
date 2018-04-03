@@ -10,8 +10,8 @@
         <attribute name="initalRepeatMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="initalShuffleMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="initalVolume" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="lastPlaybackState" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="lastUpdateDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="nextPlaybackInitalDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="playbackStates" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="volumeLevels" attributeType="Transformable" syncable="YES"/>
         <relationship name="song" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="records" inverseEntity="Song" syncable="YES"/>
     </entity>
@@ -41,7 +41,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaybackRecord" inverseName="song" inverseEntity="PlaybackRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="238"/>
+        <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="240"/>
         <element name="Song" positionX="-281" positionY="-9" width="128" height="390"/>
     </elements>
 </model>

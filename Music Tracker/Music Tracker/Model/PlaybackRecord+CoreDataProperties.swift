@@ -25,9 +25,26 @@ extension PlaybackRecord {
     @NSManaged public var initalRepeatMode: Int16
     @NSManaged public var initalPlaybackState: Int16
     @NSManaged public var initalHeartRateLastHour: NSNumber?
-    @NSManaged public var volumeLevels: [Double: Float]
-    @NSManaged public var lastPlaybackState: Int16
-    @NSManaged public var lastUpdateDate: NSDate
+
+    /*
+     playbackTime: {
+     date: Date,
+     volume: Float
+     }
+     */
+    @NSManaged public var volumeLevels: [Double: [String: Any]]
+
+    /*
+     playbackTime: {
+     date: Date,
+     volume: Float
+     }
+     */
+    @NSManaged public var playbackStates: [Double: [String: Any]]
+
+    // start date of next item
+    @NSManaged public var nextPlaybackInitalDate: NSDate
+
     @NSManaged public var song: Song
 
 }

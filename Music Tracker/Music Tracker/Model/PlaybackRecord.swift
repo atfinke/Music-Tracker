@@ -19,7 +19,8 @@ public class PlaybackRecord: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
-    init?(volume: Float,
+    init?(date: NSDate,
+          volume: Float,
           location: CLLocationCoordinate2D?,
           heartRate: Int?,
           song: Song,
@@ -30,8 +31,7 @@ public class PlaybackRecord: NSManagedObject {
         }
         super.init(entity: entity, insertInto: context)
 
-        self.initalDate = NSDate()
-        self.lastUpdateDate = self.initalDate
+        self.initalDate = date
 
         if let lat = location?.latitude {
             self.initalLatitude = NSNumber(value: lat)
@@ -41,16 +41,25 @@ public class PlaybackRecord: NSManagedObject {
         }
 
         let player = MPMusicPlayerController.systemMusicPlayer
-
         self.initalVolume = volume
-        self.volumeLevels = [player.currentPlaybackTime: self.initalVolume]
+        self.volumeLevels = [
+            player.currentPlaybackTime: [
+                "Date": date,
+                "Volume": self.initalVolume
+            ]
+        ]
 
         self.initalPlaybackTime = player.currentPlaybackTime
         self.initalShuffleMode = Int16(player.shuffleMode.rawValue)
         self.initalRepeatMode = Int16(player.repeatMode.rawValue)
 
         self.initalPlaybackState = Int16(player.playbackState.rawValue)
-        self.lastPlaybackState = self.initalPlaybackState
+        self.playbackStates = [
+            player.currentPlaybackTime: [
+                "Date": date,
+                "PlaybackState": self.initalPlaybackState
+            ]
+        ]
 
         if let heart = heartRate {
             self.initalHeartRateLastHour = NSNumber(value: heart)
@@ -58,11 +67,22 @@ public class PlaybackRecord: NSManagedObject {
         self.song = song
     }
 
-    func update(volume: Float) {
-        self.lastUpdateDate = NSDate()
+    func update(volume: Float?) {
+        let date = Date()
         let player = MPMusicPlayerController.systemMusicPlayer
-        self.volumeLevels[player.currentPlaybackTime] = volume
-        self.lastPlaybackState = Int16(player.playbackState.rawValue)
+
+        if let volume = volume {
+            self.volumeLevels[player.currentPlaybackTime] = [
+                "Date": date,
+                "Volume": volume
+            ]
+        } else {
+            self.playbackStates[player.currentPlaybackTime] = [
+                "Date": date,
+                "PlaybackState": self.initalPlaybackState
+            ]
+        }
+
     }
 
 
