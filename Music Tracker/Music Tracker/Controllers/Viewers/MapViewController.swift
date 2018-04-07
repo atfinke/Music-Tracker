@@ -32,6 +32,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
+                                            target: self,
+                                            action: #selector(reload))
+        navigationItem.rightBarButtonItem = barButtonItem
+
         mapView.delegate = self
         mapView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mapView)
@@ -43,11 +48,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+
+        reload()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
+    @objc
+    func reload() {
         mapView.removeAnnotations(mapView.annotations)
 
         let mapSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
@@ -56,7 +62,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         let playbackRecordFetch = NSFetchRequest<PlaybackRecord>(entityName: "PlaybackRecord")
         playbackRecordFetch.sortDescriptors = [NSSortDescriptor(key: "initalDate", ascending: false)]
-//        playbackRecordFetch.fetchLimit = 5
 
         do {
             let records = try managedContext.fetch(playbackRecordFetch)

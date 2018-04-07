@@ -1,5 +1,5 @@
 //
-//  RecordsTableViewController.swift
+//  GenericTableViewController.swift
 //  Music Tracker
 //
 //  Created by Andrew Finke on 4/3/18.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 struct GenericSection {
     let title: String
@@ -47,6 +48,18 @@ class GenericTableViewController: UITableViewController {
                                             target: self,
                                             action: #selector(donePressed(_:)))
         navigationItem.rightBarButtonItem = barButtonItem
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil, queue: nil) { _ in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: nil, queue: nil) { _ in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     @objc
@@ -143,7 +156,15 @@ class GenericTableViewController: UITableViewController {
 
         var keyItems = [GenericTableItem]()
         for key in record.entity.attributesByName.keys.sorted() {
-            if let value = record.value(forKey: key) {
+            if let value = record.value(forKey: key) as? [Double: Any] {
+                var string = ""
+                for k in value.keys.sorted() {
+                    if let v = value[k] {
+                         string += k.description + ": \(v)\n"
+                    }
+                }
+                 keyItems.append(GenericTableItem(text: key, subtext: string))
+            } else if let value = record.value(forKey: key) {
                 keyItems.append(GenericTableItem(text: key, subtext: "\(value)"))
             }
         }

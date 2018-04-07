@@ -79,7 +79,7 @@ public class PlaybackRecord: NSManagedObject {
         } else {
             self.playbackStates[player.currentPlaybackTime] = [
                 "Date": date,
-                "PlaybackState": self.initalPlaybackState
+                "PlaybackState": player.playbackState.rawValue
             ]
         }
 

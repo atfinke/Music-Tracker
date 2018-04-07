@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		145047B920733F50005AC411 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145047B820733F50005AC411 /* MapViewController.swift */; };
-		1454F5F620734B0C0095F90F /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */; };
+		145360B320741426008909A0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145360B220741425008909A0 /* MapViewController.swift */; };
+		1454F5F620734B0C0095F90F /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454F5F520734B0C0095F90F /* GenericTableViewController.swift */; };
 		14A0634B20740E1D004DD746 /* RecentRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */; };
 		14AA24882071CD240050A507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA24872071CD240050A507 /* AppDelegate.swift */; };
 		14AA248D2071CD240050A507 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AA248B2071CD240050A507 /* Main.storyboard */; };
@@ -28,8 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		145047B820733F50005AC411 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "Music Tracker/View Controller/New Group/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
-		1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewController.swift; sourceTree = "<group>"; };
+		145360B220741425008909A0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1454F5F520734B0C0095F90F /* GenericTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewController.swift; sourceTree = "<group>"; };
 		14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRecordsViewController.swift; sourceTree = "<group>"; };
 		14AA24842071CD240050A507 /* Music Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AA24872071CD240050A507 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 		14A0634D2074101C004DD746 /* Viewers */ = {
 			isa = PBXGroup;
 			children = (
-				145047B820733F50005AC411 /* MapViewController.swift */,
-				1454F5F520734B0C0095F90F /* RecordsTableViewController.swift */,
+				145360B220741425008909A0 /* MapViewController.swift */,
+				1454F5F520734B0C0095F90F /* GenericTableViewController.swift */,
 				14A0634A20740E1D004DD746 /* RecentRecordsViewController.swift */,
 			);
 			path = Viewers;
@@ -227,7 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AA24AD2071E1260050A507 /* Song+CoreDataProperties.swift in Sources */,
-				1454F5F620734B0C0095F90F /* RecordsTableViewController.swift in Sources */,
+				1454F5F620734B0C0095F90F /* GenericTableViewController.swift in Sources */,
 				14A0634B20740E1D004DD746 /* RecentRecordsViewController.swift in Sources */,
 				14AA24B32071ECB40050A507 /* HealthManager.swift in Sources */,
 				14AA24B92071F8590050A507 /* ViewController+Music.swift in Sources */,
@@ -235,10 +235,10 @@
 				14AA24AC2071E1260050A507 /* Song.swift in Sources */,
 				14AA24B12071E6F50050A507 /* PlaybackRecord+CoreDataProperties.swift in Sources */,
 				14AA24B02071E6F50050A507 /* PlaybackRecord.swift in Sources */,
-				145047B920733F50005AC411 /* MapViewController.swift in Sources */,
 				14AA24A72071CD510050A507 /* ViewController+Location.swift in Sources */,
 				14AA24882071CD240050A507 /* AppDelegate.swift in Sources */,
 				14AA24902071CD240050A507 /* Music_Tracker.xcdatamodeld in Sources */,
+				145360B320741426008909A0 /* MapViewController.swift in Sources */,
 				14AA24BB2071F96D0050A507 /* ViewController+Fetching.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
