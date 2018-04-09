@@ -1,60 +1,18 @@
 //
-//  ViewController+Music.swift
+//  MusicManager+CoreData.swift
 //  Music Tracker
 //
-//  Created by Andrew Finke on 4/2/18.
+//  Created by Andrew Finke on 4/7/18.
 //  Copyright © 2018 Andrew Finke. All rights reserved.
 //
 
 import Foundation
-import MediaPlayer
 import CoreData
+import MediaPlayer
 
-extension ViewController {
+extension MusicManager {
 
-    func configureMusic()  {
-        let player = MPMusicPlayerController.systemMusicPlayer
-        player.beginGeneratingPlaybackNotifications()
-
-        let nowPlayingName = NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange
-        NotificationCenter.default.addObserver(forName: nowPlayingName, object: nil, queue: nil) { _ in
-
-            print("Now Playing Notification")
-
-            let date = NSDate()
-            self.fetchLastPlaybackRecord()?.nextPlaybackInitalDate = date
-
-            guard let item = player.nowPlayingItem,
-                let song = self.fetchSong(for: item) else { return }
-
-            self.createPlaybackRecord(song: song, date: date)
-        }
-
-        let volumeName = NSNotification.Name.MPMusicPlayerControllerVolumeDidChange
-        NotificationCenter.default.addObserver(forName: volumeName, object: nil, queue: nil) { _ in
-
-            print("Volume Notification")
-
-            guard let item = player.nowPlayingItem,
-                let song = self.fetchSong(for: item) else { return }
-
-            DispatchQueue.main.async {
-                self.updateLastPlaybackRecord(for: song, volume: self.volume())
-            }
-        }
-
-        let playbackName = NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange
-        NotificationCenter.default.addObserver(forName: playbackName, object: nil, queue: nil) { _ in
-            print("Playback Notification")
-
-            guard let item = player.nowPlayingItem,
-                let song = self.fetchSong(for: item) else { return }
-
-            DispatchQueue.main.async {
-                self.updateLastPlaybackRecord(for: song, volume: nil)
-            }
-        }
-    }
+    // MARK: - Music Updates
 
     func fetchSong(for mediaItem: MPMediaItem) -> Song? {
         let songFetch = NSFetchRequest<Song>(entityName: "Song")
@@ -71,13 +29,26 @@ extension ViewController {
         }
     }
 
+    func fetchLastPlaybackRecord() -> PlaybackRecord?  {
+        let playbackRecordFetch = NSFetchRequest<PlaybackRecord>(entityName: "PlaybackRecord")
+        playbackRecordFetch.sortDescriptors = [NSSortDescriptor(key: "initalDate", ascending: false)]
+        playbackRecordFetch.fetchLimit = 1
+
+        do {
+            return try managedContext.fetch(playbackRecordFetch).first
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+        return nil
+    }
+
     func createPlaybackRecord(song: Song, date: NSDate) {
         self.healthManager.measure { heartRate in
             DispatchQueue.main.async {
                 let volume = self.volume()
                 let location = self.locationManager.location?.coordinate
 
-                guard let record = PlaybackRecord(date: date,
+                guard let _ = PlaybackRecord(date: date,
                                                   volume: volume,
                                                   location: location,
                                                   heartRate: heartRate,
@@ -88,7 +59,7 @@ extension ViewController {
 
                 do {
                     try self.managedContext.save()
-                    self.updateUI(song: song, record: record)
+                    NotificationCenter.default.post(name: MusicManager.MusicManagerCreateNotificationName, object: nil)
                 } catch let error as NSError {
                     fatalError("Could not save song. \(error), \(error.userInfo)")
                 }
@@ -104,7 +75,6 @@ extension ViewController {
             record.update(volume: volume)
             do {
                 try self.managedContext.save()
-                self.updateUI(song: song, record: record)
             } catch let error as NSError {
                 fatalError(#function + "Could not update record. \(error), \(error.userInfo)")
             }
@@ -118,32 +88,30 @@ extension ViewController {
         }
     }
 
-    func fetchLastPlaybackRecord() -> PlaybackRecord?  {
+    // MARK: - Data Viewing
+
+    func fetchAllRecentRecords() -> [PlaybackRecord] {
         let playbackRecordFetch = NSFetchRequest<PlaybackRecord>(entityName: "PlaybackRecord")
         playbackRecordFetch.sortDescriptors = [NSSortDescriptor(key: "initalDate", ascending: false)]
-        playbackRecordFetch.fetchLimit = 1
 
         do {
-            return try managedContext.fetch(playbackRecordFetch).first
+            return try managedContext.fetch(playbackRecordFetch)
         } catch {
             fatalError(error.localizedDescription)
         }
-        return nil
     }
 
-    func updateUI(song: Song, record: PlaybackRecord) {
-        var string = "Current Song:\n\n"
-        for key in song.entity.attributesByName.keys.sorted() where key != "artworkData" {
-            if let value = song.value(forKey: key) {
-                string += "\(key): \(value)\n"
-            }
+    func fetchAllTopSongs() -> [Song] {
+        let songFetch = NSFetchRequest<Song>(entityName: "Song")
+
+        do {
+            let results = try managedContext.fetch(songFetch)
+            return results.sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.records?.count ?? 0 > rhs.records?.count ?? 0
+            })
+        } catch {
+            fatalError(error.localizedDescription)
         }
-        string += "\n===============\n\nCurrent PlaybackRecord:\n\n"
-        for key in record.entity.attributesByName.keys.sorted() {
-            if let value = record.value(forKey: key) {
-                string += "\(key): \(value)\n"
-            }
-        }
-        textView.text = string
     }
+    
 }

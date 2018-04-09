@@ -1,16 +1,14 @@
 //
-//  ViewController+Location.swift
+//  MusicManager+Location.swift
 //  Music Tracker
 //
 //  Created by Andrew Finke on 4/1/18.
 //  Copyright © 2018 Andrew Finke. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
-import MediaPlayer
 
-extension ViewController: CLLocationManagerDelegate {
+extension MusicManager: CLLocationManagerDelegate {
     
     func configureLocationManager() {
         locationManager.delegate = self
