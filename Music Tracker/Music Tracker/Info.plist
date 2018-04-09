@@ -17,9 +17,17 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>103</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>NSAppleMusicUsageDescription</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>NSHealthShareUsageDescription</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -28,14 +36,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>NSHealthShareUsageDescription</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>NSAppleMusicUsageDescription</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -21,55 +21,62 @@
                         <viewLayoutGuide key="safeArea" id="usA-gM-Bu1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="jh7-tS-GKq"/>
-                    <navigationItem key="navigationItem" id="XhX-eu-iaK"/>
+                    <navigationItem key="navigationItem" title="Map" id="XhX-eu-iaK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZA-KT-dph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="698" y="856"/>
         </scene>
         <!--Recents-->
-        <scene sceneID="Wa7-jp-pp2">
+        <scene sceneID="EZi-5O-sV8">
             <objects>
-                <tableViewController id="qBe-Ob-eGC" customClass="RecentRecordsViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Z1H-Tk-UpY">
+                <collectionViewController id="Yph-qD-JF4" customClass="RecentRecordsArtworkCollectionViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="d1I-IH-Y5i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MoG-rH-hDY">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
                         <connections>
-                            <outlet property="dataSource" destination="qBe-Ob-eGC" id="Jbd-fz-g36"/>
-                            <outlet property="delegate" destination="qBe-Ob-eGC" id="g13-Qz-hqe"/>
+                            <outlet property="dataSource" destination="Yph-qD-JF4" id="ctf-B5-CVG"/>
+                            <outlet property="delegate" destination="Yph-qD-JF4" id="Bzs-Fj-ZfP"/>
                         </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Recents" id="wWu-ga-d1F"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2DK-Tk-Pod" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Recents" id="Tmg-Nj-pMS"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpR-Ae-00v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="697" y="1539"/>
+            <point key="canvasLocation" x="697" y="2245"/>
         </scene>
-        <!--Recent-->
-        <scene sceneID="B5q-Xf-EAM">
+        <!--Navigation Controller-->
+        <scene sceneID="PZE-Hm-AsY">
             <objects>
-                <navigationController id="E69-EC-ZcV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recent" id="Qq8-AM-XaM"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PgD-qe-fFh">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                <navigationController id="fNc-HM-d5C" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="UPC-dU-mGn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Bt2-m7-PCl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="qBe-Ob-eGC" kind="relationship" relationship="rootViewController" id="IOU-fh-dEc"/>
+                        <segue destination="Yph-qD-JF4" kind="relationship" relationship="rootViewController" id="rT9-iQ-7I8"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iae-WZ-2Cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NOG-im-orY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="1539"/>
+            <point key="canvasLocation" x="-50" y="2245"/>
         </scene>
         <!--Map-->
         <scene sceneID="0tl-x1-Aye">
             <objects>
                 <navigationController id="te4-oU-2tT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="Urt-hz-MEo"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0ZM-1d-KNJ">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0ZM-1d-KNJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -79,22 +86,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ao-Z9-qga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50" y="856"/>
-        </scene>
-        <!--Console-->
-        <scene sceneID="L8V-YY-eu8">
-            <objects>
-                <viewController id="dTo-Cy-CZb" customClass="ViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jYf-3a-X00">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="76I-z9-ede"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Console" id="zdF-DJ-vgA"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bhf-Yb-0DH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-49" y="172"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0fj-yC-vNG">
@@ -106,14 +97,57 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="dTo-Cy-CZb" kind="relationship" relationship="viewControllers" id="Dso-9W-AMd"/>
                         <segue destination="te4-oU-2tT" kind="relationship" relationship="viewControllers" id="Rft-zd-OpL"/>
-                        <segue destination="E69-EC-ZcV" kind="relationship" relationship="viewControllers" id="yXX-hK-m7W"/>
+                        <segue destination="fNc-HM-d5C" kind="relationship" relationship="viewControllers" id="1sB-wn-F0x"/>
+                        <segue destination="dGk-ph-Xjj" kind="relationship" relationship="viewControllers" id="FRT-nK-vhY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IvY-NI-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1004" y="505"/>
+        </scene>
+        <!--Top Played-->
+        <scene sceneID="b35-Ia-rpr">
+            <objects>
+                <collectionViewController id="VCZ-P6-Xlj" customClass="TopSongsArtworkCollectionViewController" customModule="Music_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="BmP-yz-Rb0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8In-J0-4n8">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="VCZ-P6-Xlj" id="Zo2-CN-M2J"/>
+                            <outlet property="delegate" destination="VCZ-P6-Xlj" id="6IN-Yo-ELA"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Top Played" id="yld-Lj-GE3"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MT9-qq-ZL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="697" y="1521"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HGj-IP-O1U">
+            <objects>
+                <navigationController id="dGk-ph-Xjj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="4qT-gl-V2L"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Ve8-EQ-lRa">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VCZ-P6-Xlj" kind="relationship" relationship="rootViewController" id="GTM-RD-x02"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-mn-CzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="1521"/>
         </scene>
     </scenes>
 </document>

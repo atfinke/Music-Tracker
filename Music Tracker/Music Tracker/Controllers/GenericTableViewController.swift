@@ -44,18 +44,12 @@ class GenericTableViewController: UITableViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
 
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+        _ = UIBarButtonItem(barButtonSystemItem: .done,
                                             target: self,
                                             action: #selector(donePressed(_:)))
-        navigationItem.rightBarButtonItem = barButtonItem
+        // navigationItem.rightBarButtonItem = barButtonItem
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil, queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: nil, queue: nil) { _ in
+        NotificationCenter.default.addObserver(forName: MusicManager.MusicManagerCreateNotificationName, object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
