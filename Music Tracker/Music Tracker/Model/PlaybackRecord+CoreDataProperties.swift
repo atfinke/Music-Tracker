@@ -26,6 +26,8 @@ extension PlaybackRecord {
     @NSManaged public var initalPlaybackState: Int16
     @NSManaged public var initalHeartRateLastHour: NSNumber?
 
+    @NSManaged public var uploadedToLastFM: Bool
+
     /*
      playbackTime: {
      date: Date,
@@ -43,7 +45,7 @@ extension PlaybackRecord {
     @NSManaged public var playbackStates: [Double: [String: Any]]
 
     // start date of next item
-    @NSManaged public var nextPlaybackInitalDate: NSDate
+    @NSManaged public var nextPlaybackInitalDate: NSDate?
 
     @NSManaged public var song: Song
 

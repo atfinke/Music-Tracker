@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1212" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1314" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PlaybackRecord" representedClassName="PlaybackRecord" syncable="YES">
         <attribute name="initalDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="initalHeartRateLastHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -12,6 +12,7 @@
         <attribute name="initalVolume" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="nextPlaybackInitalDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="playbackStates" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="uploadedToLastFM" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="volumeLevels" attributeType="Transformable" syncable="YES"/>
         <relationship name="song" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="records" inverseEntity="Song" syncable="YES"/>
     </entity>
@@ -41,7 +42,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaybackRecord" inverseName="song" inverseEntity="PlaybackRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="240"/>
+        <element name="PlaybackRecord" positionX="-54" positionY="0" width="128" height="255"/>
         <element name="Song" positionX="-281" positionY="-9" width="128" height="390"/>
     </elements>
 </model>

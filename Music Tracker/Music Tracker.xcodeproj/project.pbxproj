@@ -11,6 +11,8 @@
 		14015D522079784E00FED91F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14015D512079784E00FED91F /* MusicManager.swift */; };
 		14015D5420797AB200FED91F /* MusicManager+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14015D5320797AB200FED91F /* MusicManager+CoreData.swift */; };
 		14015D5620797B0700FED91F /* MusicManager+Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14015D5520797B0700FED91F /* MusicManager+Music.swift */; };
+		143209632080F8AB0051F414 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143209622080F8AB0051F414 /* Secrets.swift */; };
+		143209652080FC860051F414 /* MD5Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143209642080FC860051F414 /* MD5Digest.swift */; };
 		145360B320741426008909A0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145360B220741425008909A0 /* MapViewController.swift */; };
 		1454F5F620734B0C0095F90F /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454F5F520734B0C0095F90F /* GenericTableViewController.swift */; };
 		14AA24882071CD240050A507 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA24872071CD240050A507 /* AppDelegate.swift */; };
@@ -32,6 +34,8 @@
 		14015D512079784E00FED91F /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		14015D5320797AB200FED91F /* MusicManager+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicManager+CoreData.swift"; sourceTree = "<group>"; };
 		14015D5520797B0700FED91F /* MusicManager+Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MusicManager+Music.swift"; sourceTree = "<group>"; };
+		143209622080F8AB0051F414 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		143209642080FC860051F414 /* MD5Digest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5Digest.swift; sourceTree = "<group>"; };
 		145360B220741425008909A0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1454F5F520734B0C0095F90F /* GenericTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewController.swift; sourceTree = "<group>"; };
 		14AA24842071CD240050A507 /* Music Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +134,8 @@
 				14015D5520797B0700FED91F /* MusicManager+Music.swift */,
 				14015D5320797AB200FED91F /* MusicManager+CoreData.swift */,
 				14AA24A52071CD510050A507 /* MusicManager+Location.swift */,
+				143209622080F8AB0051F414 /* Secrets.swift */,
+				143209642080FC860051F414 /* MD5Digest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,7 +251,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143209652080FC860051F414 /* MD5Digest.swift in Sources */,
 				14AA24AD2071E1260050A507 /* Song+CoreDataProperties.swift in Sources */,
+				143209632080F8AB0051F414 /* Secrets.swift in Sources */,
 				1454F5F620734B0C0095F90F /* GenericTableViewController.swift in Sources */,
 				14AA24B32071ECB40050A507 /* HealthManager.swift in Sources */,
 				14AA24AC2071E1260050A507 /* Song.swift in Sources */,
