@@ -42,13 +42,13 @@ extension MusicManager {
         return nil
     }
 
-    func createPlaybackRecord(song: Song, date: NSDate) {
+    func createPlaybackRecord(song: Song, date: NSDate, completion: @escaping ((PlaybackRecord) -> Void)) {
         self.healthManager.measure { heartRate in
             DispatchQueue.main.async {
                 let volume = self.volume()
                 let location = self.locationManager.location?.coordinate
 
-                guard let _ = PlaybackRecord(date: date,
+                guard let record = PlaybackRecord(date: date,
                                                   volume: volume,
                                                   location: location,
                                                   heartRate: heartRate,
@@ -60,6 +60,7 @@ extension MusicManager {
                 do {
                     try self.managedContext.save()
                     NotificationCenter.default.post(name: MusicManager.MusicManagerCreateNotificationName, object: nil)
+                    completion(record)
                 } catch let error as NSError {
                     fatalError("Could not save song. \(error), \(error.userInfo)")
                 }
@@ -79,7 +80,9 @@ extension MusicManager {
                 fatalError(#function + "Could not update record. \(error), \(error.userInfo)")
             }
         } else {
-            self.createPlaybackRecord(song: song, date: NSDate())
+            self.createPlaybackRecord(song: song, date: NSDate()) { record in
+                self.updateNowPlaying(for: record)
+            }
             do {
                 try self.managedContext.save()
             } catch let error as NSError {

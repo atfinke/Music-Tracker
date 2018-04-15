@@ -22,13 +22,15 @@ extension MusicManager {
             let date = NSDate()
             if let record = self.fetchLastPlaybackRecord() {
                 record.nextPlaybackInitalDate = date
-                self.attemptUploadToLastFM(record)
+                self.scrobble(record)
             }
 
             guard let item = player.nowPlayingItem,
                 let song = self.fetchSong(for: item) else { return }
 
-            self.createPlaybackRecord(song: song, date: date)
+            self.createPlaybackRecord(song: song, date: date) { record in
+                self.updateNowPlaying(for: record)
+            }
         }
 
         let volumeName = NSNotification.Name.MPMusicPlayerControllerVolumeDidChange
@@ -57,23 +59,43 @@ extension MusicManager {
         }
     }
 
-    func attemptUploadToLastFM(_ record: PlaybackRecord) {
+    func scrobble(_ record: PlaybackRecord) {
         if record.uploadedToLastFM {
             return
         }
 
-//        A track should only be scrobbled when the following conditions have been met:
-//
-//        The track must be longer than 30 seconds.
-//        And the track has been played for at least half its duration, or for 4 minutes (whichever occurs earlier.)
+        // Requirements: https://www.last.fm/api/scrobbling
         let songDuration = record.song.playbackDuration
         guard songDuration > 30,
             let finalDate = record.nextPlaybackInitalDate,
             finalDate.timeIntervalSince(record.initalDate as Date) > songDuration / 2,
-            let track = record.song.title,
+            let request = request(for: record, method: "track.scrobble") else {
+                return
+        }
+
+        let task = URLSession.shared.dataTask(with: request) { (_, response, _) in
+            if (response as? HTTPURLResponse)?.statusCode == 200 {
+                record.uploadedToLastFM = true
+            }
+        }
+        task.resume()
+    }
+
+    func updateNowPlaying(for record: PlaybackRecord) {
+        guard let request = request(for: record, method: "track.updateNowPlaying") else {
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: request)
+        task.resume()
+    }
+
+    func request(for record: PlaybackRecord, method: String) -> URLRequest? {
+        let songDuration = record.song.playbackDuration
+        guard let track = record.song.title,
             let artist = record.song.artist,
             let album = record.song.albumTitle else {
-            return
+                return nil
         }
 
         let properties: [String: Any] = [
@@ -84,7 +106,7 @@ extension MusicManager {
 
             "timestamp": Int(record.initalDate.timeIntervalSince1970),
 
-            "method": "track.scrobble",
+            "method": method,
             "sk": Secrets.lastFMSK,
             "api_key": Secrets.lastFMAPIKey,
 
@@ -100,7 +122,7 @@ extension MusicManager {
         for key in properties.keys.sorted() {
             guard let value = properties[key],
                 let encoded = "\(value)".addingPercentEncoding(withAllowedCharacters: allowedQueryParamAndKey) else {
-                    return
+                    return nil
             }
 
             signature += key + "\(value)"
@@ -110,19 +132,15 @@ extension MusicManager {
         signature += Secrets.lastFMSecret
         httpBody += "api_sig=\(signature.utf8.md5.description)"
 
-        guard let data = httpBody.data(using: .utf8) else { fatalError() }
+        guard let data = httpBody.data(using: .utf8) else { return nil }
 
         let url = URL(string: "https://ws.audioscrobbler.com/2.0/")!
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = data
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if (response as? HTTPURLResponse)?.statusCode == 200 {
-                record.uploadedToLastFM = true
-            }
-        }
-        task.resume()
+        return urlRequest
     }
-    
+
 }
+
