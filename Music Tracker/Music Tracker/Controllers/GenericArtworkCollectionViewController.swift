@@ -41,6 +41,11 @@ class TopSongsArtworkCollectionViewController: ArtworkCollectionViewController {
 }
 
 class RecentRecordsArtworkCollectionViewController: ArtworkCollectionViewController {
+
+    @IBAction func scrobbleAll(_ sender: Any) {
+        MusicManager.shared.scrobbleAll()
+    }
+
     override func update() {
         self.records = MusicManager.shared.fetchAllRecentRecords()
         collectionView?.reloadSections(IndexSet(integer: 0))

@@ -81,12 +81,27 @@ extension MusicManager {
             }
         } else {
             self.createPlaybackRecord(song: song, date: NSDate()) { record in
-                self.updateNowPlaying(for: record)
+                LastFM.updateNowPlaying(for: record)
             }
             do {
                 try self.managedContext.save()
             } catch let error as NSError {
                 fatalError(#function + " Could not save new record. \(error), \(error.userInfo)")
+            }
+        }
+    }
+
+    func scrobbleAll() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let records = fetchAllRecentRecords()
+        DispatchQueue.global(qos: .utility).async {
+            for record in records where !record.uploadedToLastFM {
+                LastFM.scrobble(record)
+                // avoid rate limit
+                usleep(500000) // 0.5 seconds
+            }
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
         }
     }

@@ -47,7 +47,13 @@
                             <outlet property="delegate" destination="Yph-qD-JF4" id="Bzs-Fj-ZfP"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Recents" id="Tmg-Nj-pMS"/>
+                    <navigationItem key="navigationItem" title="Recents" id="Tmg-Nj-pMS">
+                        <barButtonItem key="leftBarButtonItem" title="Scrobble All" id="9NF-Pn-wIc">
+                            <connections>
+                                <action selector="scrobbleAll:" destination="Yph-qD-JF4" id="Ytj-3x-As8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpR-Ae-00v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
