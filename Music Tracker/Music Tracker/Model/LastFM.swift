@@ -11,13 +11,10 @@ import Foundation
 struct LastFM {
 
     static func scrobble(_ record: PlaybackRecord, completion: ((Bool) -> Void)? = nil) {
-        if record.uploadedToLastFM {
-            return
-        }
-
         // Requirements: https://www.last.fm/api/scrobbling
         let songDuration = record.song.playbackDuration
-        guard songDuration > 30,
+        guard !record.uploadedToLastFM,
+            songDuration > 30,
             let finalDate = record.nextPlaybackInitalDate,
             finalDate.timeIntervalSince(record.initalDate as Date) > songDuration / 2,
             let request = urlRequest(for: record, method: "track.scrobble") else {
@@ -45,7 +42,7 @@ struct LastFM {
         task.resume()
     }
 
-    static func urlRequest(for record: PlaybackRecord, method: String) -> URLRequest? {
+    private static func urlRequest(for record: PlaybackRecord, method: String) -> URLRequest? {
         let songDuration = record.song.playbackDuration
         guard let track = record.song.title,
             let artist = record.song.artist,
